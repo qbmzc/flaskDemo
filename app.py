@@ -1,11 +1,14 @@
 from flask import Flask, render_template, request
+import json
 
 app = Flask(__name__)
+
 
 # Ajax的post方法
 @app.route('/ajax', methods=['GET'])
 def ajax():
     return render_template("js_demo.html")
+
 
 # Ajax的post方法
 @app.route('/ajax/post', methods=['POST'])

@@ -9,8 +9,10 @@
 </head>
 <body>
 <input id="name" type="text" placeholder="请输入">
-<button id="button1">Ajax GET</button><br>
-<button id="button2">Ajax POST</button><br>
+<button id="button1">Ajax GET</button>
+<br>
+<button id="button2">Ajax POST</button>
+<br>
 {#  另一种写法，指定方法名称为getTest() #}
 <button onclick="getTest()">get另外一种写法</button>
 <script>
@@ -27,34 +29,52 @@
 
         });
         {# $.post(URL,data,callback); #}
-        $("#button2").click(function () {
-            $.post("/ajax/post",
-                {
-                    name: "cong",
-                    url: "https://qbmzc.github.io/"
-                },
-                function (res) {
-                    alert("数据: \n" + res.data + "\n状态: " + res.status);
-                });
-        });
-    });
 
-     function getTest() {
+        $("#button2").click(function () {
+            data = {
+                "name": "cong",
+                "url": "https://qbmzc.github.io/"
+            }
             $.ajax({
-                type: 'GET', //方法类型为GET
-                url: '/ajax/get',
+                type: 'POST', //方法类型为GET
+                url: '/ajax/post',
                 dataType: 'json',
-                data: {'name': 'cong'},
+                data: data,
                 success: function (res) {
-                    alert(res.data+res.status);
+                    alert(res.data + res.status);
                     //浏览器控制台打印日志
                     console.log(res)
                 },
                 error: function () {
-                    consle.log('error')
+                    console.log('error')
                 }
             })
-        }
+
+
+            {#$.post("/ajax/post",#}
+            {#    JSON.stringify(data),#}
+            {#    function (res) {#}
+            {#        alert("数据: \n" + res.data + "\n状态: " + res.status);#}
+            {#    });#}
+        });
+    });
+
+    function getTest() {
+        $.ajax({
+            type: 'GET', //方法类型为GET
+            url: '/ajax/get',
+            dataType: 'json',
+            data: {'name': 'cong'},
+            success: function (res) {
+                alert(res.data + res.status);
+                //浏览器控制台打印日志
+                console.log(res)
+            },
+            error: function () {
+                consle.log('error')
+            }
+        })
+    }
 </script>
 </body>
 </html>
